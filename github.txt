@@ -1,0 +1,43 @@
+public class Solution {
+    
+    public static int partion(int[] input,int si,int ei){
+        int count =0;
+        for(int i=si+1;i<=ei;i++){
+            if(input[i]<input[si]){
+                count++;
+            }
+        }
+        int temp=input[si];
+        input[si]=input[si+count];
+        input[si+count]=temp;
+        int pi =si+count;
+        int i =si;
+        int j = ei;
+        while(i<=j){
+            if(input[i]<input[pi]){
+                i++;
+            }else if(input[j]>input[pi]){
+                j--;
+            }else{
+                temp=input[i];
+                input[i]=input[j];
+                input[j]=temp;
+            }
+        }
+        return pi;
+    }
+    
+    public static void quickSort(int[] input,int si,int ei){
+        if(si>=ei){
+            return;
+        }
+        int pi =partion(input,si,ei);
+        quickSort(input,si,pi-1);
+        quickSort(input,pi+1,ei);
+    }
+	
+	public static void quickSort(int[] input) {
+		quickSort(input,0,input.length-1);
+	}
+	
+}
